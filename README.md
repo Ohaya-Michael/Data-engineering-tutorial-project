@@ -121,13 +121,15 @@ All queries run against a jobs dataset with the following tables:
 
 Relationships: `job_postings_fact.company_id → company_dim.company_id` and `job_postings_fact.job_id → skills_job_dim.job_id → skills_dim.skill_id`.
 
+> 📥 **Dataset download:** the raw CSV files are not stored in this repo (they are git-ignored). Download them from the shared Google Drive folder: **[Data Engineering dataset](https://drive.google.com/drive/folders/1n6Claqc5luQWSMkao_nkdIV6ht2bXRuD?usp=drive_link)**
+
 [⬆ Back to top](#-table-of-contents)
 
 ---
 
 ## 🚀 Getting Started
 
-1. Load the dataset into a SQL engine — these queries were run in **DuckDB** (PostgreSQL works with minor tweaks).
+1. Download the dataset from the [shared Google Drive folder](https://drive.google.com/drive/folders/1n6Claqc5luQWSMkao_nkdIV6ht2bXRuD?usp=drive_link) and load it into a SQL engine — these queries were run in **DuckDB** (PostgreSQL works with minor tweaks).
 2. Browse the [`Lessons/`](Lessons/) folder to follow the fundamentals, or jump to [`1_project/`](1_project/) for the analysis.
 3. Run the query at the top of any `.sql` file and compare against the embedded result tables.
 4. To regenerate the project charts: `python 1_project/make_charts.py` (requires `matplotlib`).
