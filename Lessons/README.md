@@ -19,6 +19,7 @@ Dataset tables used throughout: `job_postings_fact`, `company_dim`, `skills_dim`
   - [3. Advanced Filtering](#3-advanced-filtering--advance_commandssql)
   - [4. Joins](#4-joins--joinssql)
   - [5. Grouping & Order of Execution](#5-grouping--order-of-execution--order_of_executionsql)
+  - [6. Data Types & Casting](#6-data-types--casting--data_typessql)
 - [SQL Order of Execution](#-sql-order-of-execution)
 - [Skills Demonstrated](#-skills-demonstrated)
 - [Tools](#-tools)
@@ -160,6 +161,31 @@ ORDER BY job_posting_count DESC;
 
 [⬆ Back to top](#-table-of-contents)
 
+### 6. Data Types & Casting — [`Data_types.sql`](Data_types.sql)
+
+Converting columns to the right type for reliable analysis.
+
+- The core data types: `INTEGER`, `DECIMAL`, and `DATE`
+- Two ways to cast: the standard `CAST(column AS type)` and the shorthand `column::type`
+- Guarding casts against empty values with `IS NOT NULL`
+- Extracting date parts with `EXTRACT(YEAR FROM ...)` without altering the source column
+- Combining casting with aggregation (`AVG`), sorting, and grouping on the job-postings data
+
+```sql
+SELECT
+  job_id,
+  job_work_from_home::INTEGER      AS job_work_from_home,
+  job_posted_date::DATE            AS job_posted_date,
+  salary_year_avg::DECIMAL(10, 2)  AS salary_year_avg
+FROM job_postings_fact
+WHERE job_work_from_home IS NOT NULL
+  AND job_posted_date IS NOT NULL
+  AND salary_year_avg IS NOT NULL
+LIMIT 10;
+```
+
+[⬆ Back to top](#-table-of-contents)
+
 ---
 
 ## ⚙️ SQL Order of Execution
@@ -187,6 +213,8 @@ Understanding this explains why, for example, you can filter rows with `WHERE` b
 - Multi-table joins across a fact/dimension schema
 - Aggregation with `COUNT`, `GROUP BY`, and `HAVING`
 - Reasoning about SQL's logical order of execution
+- Data type casting with `CAST(... AS ...)` and the `::type` shorthand (`INTEGER`, `DECIMAL`, `DATE`)
+- Extracting date parts with `EXTRACT(YEAR FROM ...)`
 
 [⬆ Back to top](#-table-of-contents)
 
